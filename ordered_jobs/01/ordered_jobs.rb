@@ -3,8 +3,8 @@ class InvalidJobs < StandardError; end
 class OrderedJobs
   JOB_SEPARATOR = /\s\=\>\s?/
 
-  def self.order(jobs)
-    OrderedJobs.new(jobs).order
+  def self.sequence(jobs)
+    OrderedJobs.new(jobs).sequence
   end
 
   def initialize(jobs)
@@ -12,7 +12,7 @@ class OrderedJobs
     fail InvalidJobs if invalid?
   end
 
-  def order
+  def sequence
     @jobs.flat_map { |job, _| dependency_graph(job) }.uniq
   end
 
