@@ -1,15 +1,15 @@
 class String
-  def succ_in_same_case
+  def next_in_same_case
     return 'a' if self == 'z'
     return 'A' if self == 'Z'
 
-    succ
+    self.next
   end
 end
 
-class CC
+class CaesarCipher
   def self.cipher(message, shift)
-    CC.new(shift: shift).encrypt(message)
+    CaesarCipher.new(shift: shift).encrypt(message)
   end
 
   def initialize(shift: 0)
@@ -18,7 +18,7 @@ class CC
 
   def encrypt(message)
     message.gsub(/\w/) do |character|
-      @shift.times.inject(character) { |shifter, _| shifter.succ_in_same_case }
+      @shift.times.inject(character) { |shifter, _| shifter.next_in_same_case }
     end
   end
 end

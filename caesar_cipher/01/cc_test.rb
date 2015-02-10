@@ -12,7 +12,7 @@ class CCTest < Minitest::Test
     [
       ["What a string!", 5, "Bmfy f xywnsl!"]
     ].each do |plain, shift, cipher|
-      assert_equal cipher, CC.cipher(plain, shift)
+      assert_equal cipher, CaesarCipher.cipher(plain, shift)
     end
   end
 end
