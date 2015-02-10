@@ -1,10 +1,10 @@
 class InvalidJobs < StandardError; end
 
-class OrderedJobs
+class JobList
   JOB_SEPARATOR = /\s\=\>\s?/
 
   def self.sequence(jobs)
-    OrderedJobs.new(jobs).sequence
+    JobList.new(jobs).sequence
   end
 
   def initialize(jobs)
