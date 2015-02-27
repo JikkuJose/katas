@@ -1,4 +1,6 @@
 class CreditCard
+  VALID_LENGTH = 12..17
+
   def initialize(number)
     @number = number.to_s
   end
@@ -10,7 +12,7 @@ class CreditCard
   private
 
   def valid_length?
-    (12..17).include? @number.length
+    VALID_LENGTH.include? @number.length
   end
 
   def check_sum_match?
@@ -20,11 +22,11 @@ class CreditCard
   def check_sum
     check_less_number = @number[0..-2]
 
-    digits = check_less_number.
-      reverse.
-      each_char.
-      each_with_index.
-      map do |character, index|
+    digits = check_less_number
+             .reverse
+             .each_char
+             .each_with_index
+             .map do |character, index|
       digit = character.to_i
       index.even? ? double_and_sum(digit) : digit
     end
