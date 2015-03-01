@@ -1,5 +1,5 @@
 class CreditCard
-  VALID_LENGTH = 12..17
+  VALID_LENGTH_RANGE = 12..17
 
   def initialize(number)
     @number = number.to_s
@@ -12,16 +12,14 @@ class CreditCard
   private
 
   def valid_length?
-    VALID_LENGTH.include? @number.length
+    VALID_LENGTH_RANGE.include? @number.length
   end
 
   def check_sum_match?
-    check_sum % 10 == check_digit
+    check_sum.end_with? check_digit
   end
 
   def check_sum
-    check_less_number = @number[0..-2]
-
     digits = check_less_number
              .reverse
              .each_char
@@ -31,11 +29,15 @@ class CreditCard
       index.even? ? double_and_sum(digit) : digit
     end
 
-    digits.reduce(:+)
+    digits.reduce(:+).to_s
+  end
+
+  def check_less_number
+    @number[0..-2]
   end
 
   def check_digit
-    @number.to_i % 10
+    @number[-1]
   end
 
   def double_and_sum(digit)
